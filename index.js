@@ -11,7 +11,7 @@ app.add_comp({
     view() {
         return `<ul>
                     ${this.model.users.map((user) => {
-                        return "<li>" + user.name + "</li>"           
+                        return "<li><a href='#user-"+ user.id +"'>" + user.name + "</a></li>"           
                     }).join("")}
                 </ul>`;
     },
@@ -30,41 +30,6 @@ app.add_comp({
                 "id": 3,
                 "name": "Clementine Bauch",
                 "username": "Samantha",
-            },
-            {
-                "id": 4,
-                "name": "Patricia Lebsack",
-                "username": "Karianne",
-            },
-            {
-                "id": 5,
-                "name": "Chelsey Dietrich",
-                "username": "Kamren",
-            },
-            {
-                "id": 6,
-                "name": "Mrs. Dennis Schulist",
-                "username": "Leopoldo_Corkery",
-            },
-            {
-                "id": 7,
-                "name": "Kurtis Weissnat",
-                "username": "Elwyn.Skiles",
-            },
-            {
-                "id": 8,
-                "name": "Nicholas Runolfsdottir V",
-                "username": "Maxime_Nienow",
-            },
-            {
-                "id": 9,
-                "name": "Glenna Reichert",
-                "username": "Delphine",
-            },
-            {
-                "id": 10,
-                "name": "Clementina DuBuque",
-                "username": "Moriah.Stanton",
             }
         ]
     }
@@ -74,11 +39,7 @@ app.add_comp({
 app.add_comp({
     id: "user-comp",
     model: {
-        user: [{
-            "id": 1,
-            "name": "Leanne Graham",
-            "username": "Bret",
-        }]
+        user: {}
     },
     view() {
         return `
@@ -87,9 +48,90 @@ app.add_comp({
             <p><b>username</b>: ${this.model.user.username}</p>
         </div>
         `;
+    },
+    controller(_id) {
+
+        let users = [{
+                "id": 1,
+                "name": "Leanne Graham",
+                "username": "Bret",
+                "email": "Sincere@april.biz",
+                "address": {
+                    "street": "Kulas Light",
+                    "suite": "Apt. 556",
+                    "city": "Gwenborough",
+                    "zipcode": "92998-3874",
+                    "geo": {
+                        "lat": "-37.3159",
+                        "lng": "81.1496"
+                    }
+                },
+                "phone": "1-770-736-8031 x56442",
+                "website": "hildegard.org",
+                "company": {
+                    "name": "Romaguera-Crona",
+                    "catchPhrase": "Multi-layered client-server neural-net",
+                    "bs": "harness real-time e-markets"
+                }
+            },
+            {
+                "id": 2,
+                "name": "Ervin Howell",
+                "username": "Antonette",
+                "email": "Shanna@melissa.tv",
+                "address": {
+                    "street": "Victor Plains",
+                    "suite": "Suite 879",
+                    "city": "Wisokyburgh",
+                    "zipcode": "90566-7771",
+                    "geo": {
+                        "lat": "-43.9509",
+                        "lng": "-34.4618"
+                    }
+                },
+                "phone": "010-692-6593 x09125",
+                "website": "anastasia.net",
+                "company": {
+                    "name": "Deckow-Crist",
+                    "catchPhrase": "Proactive didactic contingency",
+                    "bs": "synergize scalable supply-chains"
+                }
+            },
+            {
+                "id": 3,
+                "name": "Clementine Bauch",
+                "username": "Samantha",
+                "email": "Nathan@yesenia.net",
+                "address": {
+                    "street": "Douglas Extension",
+                    "suite": "Suite 847",
+                    "city": "McKenziehaven",
+                    "zipcode": "59590-4157",
+                    "geo": {
+                        "lat": "-68.6102",
+                        "lng": "-47.0653"
+                    }
+                },
+                "phone": "1-463-123-4447",
+                "website": "ramiro.info",
+                "company": {
+                    "name": "Romaguera-Jacobson",
+                    "catchPhrase": "Face to face bifurcated interface",
+                    "bs": "e-enable strategic applications"
+                }
+            }
+        ]
+
+        for (let i = 0; i < this.users.length; i++) {
+            if (this.users[i].id == _id) {
+                this.model.user = this.users[i]
+                break
+            }
+        }
+
     }
 })
 
 const router = new Router(app)
 router.add_route("users-comp", "#users")
-router.add_route("user-comp", "#user-{id}")
+router.add_route("user-comp", "#users/{id}")
