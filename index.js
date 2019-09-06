@@ -138,3 +138,4 @@ app.add_comp({
 const router = new Router(app)
 router.add_route("users-comp", "#users")
 router.add_route("user-comp", "#userid/id")
+router.add_route("user-comp", "#username/username")
