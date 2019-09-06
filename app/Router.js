@@ -1,38 +1,40 @@
 export default class Router {
 
     constructor(_app) {
-        this._app = _app
-        this._routes = []
-        this._current_route = "/"
+        this.app = _app
+        this.routes = []
+        this.current_route = {
+            name: "root",
+            url: "#"
+        }
 
         this.hashchanged = this.hashchanged.bind(this)
         window.addEventListener("hashchange", this.hashchanged)
+        window.addEventListener("DOMContentLoaded", this.hashchanged)
     }
 
-    add_route(_url) {
-        this._routes.push(_url)
+    add_route(_name, _url) {
+        this.routes.push({
+            name: _name,
+            url: _url
+        })
     }
 
     hashchanged() {
 
-
-
-        for (let i = 0; i < this._routes.length; i++) {
-            console.log(this._routes[i])
-            if (this._routes[i] == window.location.hash) {
-                this._current_route = this._routes[i]
+        for (let i = 0; i < this.routes.length; i++) {
+            if (this.routes[i].url == window.location.hash) {
+                this.current_route = this.routes[i]
                 break
             } else {
-                this._current_route = ""
+                this.current_route = {
+                    name: "not-found",
+                    url: "#404"
+                }
             }
         }
 
-
-        if (this._current_route === "")
-            this._current_route = "#404"
-
-
-        console.log(this._current_route);
+        this.app.show_com(this.current_route)
 
     }
 }
