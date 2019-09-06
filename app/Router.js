@@ -23,7 +23,7 @@ export default class Router {
     hashchanged() {
 
         for (let i = 0; i < this.routes.length; i++) {
-            if (this.routes[i].url == window.location.hash) {
+            if (this.routes[i].url == window.location.hash || this.routes[i].url.slice(0, this.routes[i].url.indexOf("/")) == window.location.hash.slice(0, window.location.hash.indexOf("/"))) {
                 this.current_route = this.routes[i]
                 break
             } else {
@@ -48,7 +48,22 @@ export default class Router {
             }
         }
 
-        this.current_comp.controller()
+        if (this.current_route.url.indexOf("/")) {
+            console.log("url" + this.current_route.url);
+
+            let property = this.current_route.url.slice(this.current_route.url.indexOf("/") + 1, )
+            let value = window.location.hash.slice(window.location.hash.indexOf("/") + 1, )
+
+            console.log(property);
+            console.log(value);
+
+
+
+            this.current_comp.controller(property, value)
+        } else {
+            this.current_comp.controller()
+        }
+
         this.app.show_comp(this.current_comp)
     }
 }
