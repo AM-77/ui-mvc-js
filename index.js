@@ -122,14 +122,15 @@ app.add_comp({
             }
         ]
 
-        console.log(_property);
-        console.log(_value);
-
         for (let i = 0; i < users.length; i++) {
             if (users[i][_property] == _value) {
                 this.model.user = users[i]
                 break
             }
+        }
+
+        if (JSON.stringify(this.model.user) === JSON.stringify({})) {
+            window.location.href = location.href.slice(0, location.href.indexOf("#")) + "#404"
         }
 
     }
