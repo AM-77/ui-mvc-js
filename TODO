@@ -1,10 +1,10 @@
-- App
+[x] App
 
-- Components
+[!] Components
     - model
     - view
     - controller
 
-- Router
+[x] Router
 
-- API
+[ ] API
