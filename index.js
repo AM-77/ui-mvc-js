@@ -11,7 +11,11 @@ app.add_comp({
     view() {
         return `<ul>
                     ${this.model.users.map((user) => {
-                        return "<li><a href='#userid/"+ user.id +"'>" + user.name + "</a></li>"           
+                        return `<li>
+                                    <a href='#userid/${user.id}'><b>${user.name}</b></a>
+                                    <p><b>userid: </b>${user.id}</p>
+                                    <p><b>username: </b>${user.username}</p>
+                                </li><br>`       
                     }).join("")}
                 </ul>`;
     },
