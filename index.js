@@ -11,7 +11,7 @@ app.add_comp({
     view() {
         return `<ul>
                     ${this.model.users.map((user) => {
-                        return "<li><a href='#user-"+ user.id +"'>" + user.name + "</a></li>"           
+                        return "<li><a href='#userid/"+ user.id +"'>" + user.name + "</a></li>"           
                     }).join("")}
                 </ul>`;
     },
@@ -49,7 +49,7 @@ app.add_comp({
         </div>
         `;
     },
-    controller(_id) {
+    controller(_property, _value) {
 
         let users = [{
                 "id": 1,
@@ -122,9 +122,12 @@ app.add_comp({
             }
         ]
 
-        for (let i = 0; i < this.users.length; i++) {
-            if (this.users[i].id == _id) {
-                this.model.user = this.users[i]
+        console.log(_property);
+        console.log(_value);
+
+        for (let i = 0; i < users.length; i++) {
+            if (users[i][_property] == _value) {
+                this.model.user = users[i]
                 break
             }
         }
@@ -134,4 +137,4 @@ app.add_comp({
 
 const router = new Router(app)
 router.add_route("users-comp", "#users")
-router.add_route("user-comp", "#users/{id}")
+router.add_route("user-comp", "#userid/id")
