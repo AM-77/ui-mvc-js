@@ -49,15 +49,8 @@ export default class Router {
         }
 
         if (this.current_route.url.indexOf("/")) {
-            console.log("url" + this.current_route.url);
-
             let property = this.current_route.url.slice(this.current_route.url.indexOf("/") + 1, )
             let value = window.location.hash.slice(window.location.hash.indexOf("/") + 1, )
-
-            console.log(property);
-            console.log(value);
-
-
 
             this.current_comp.controller(property, value)
         } else {
