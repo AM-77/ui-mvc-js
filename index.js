@@ -1,4 +1,4 @@
-import App from "./app/app.js"
+import App from "./app/App.js"
 import Router from "./app/Router.js"
 
 const app = new App("#root")
@@ -6,7 +6,17 @@ const app = new App("#root")
 app.add_comp({
     id: "users-comp",
     model: {
-        users: [{
+        users: []
+    },
+    view() {
+        return `<ul>
+                    ${this.model.users.map((user) => {
+                        return "<li>" + user.name + "</li>"           
+                    }).join("")}
+                </ul>`;
+    },
+    controller() {
+        this.model.users = [{
                 "id": 1,
                 "name": "Leanne Graham",
                 "username": "Bret",
@@ -57,16 +67,29 @@ app.add_comp({
                 "username": "Moriah.Stanton",
             }
         ]
-    },
-    view(model) {
+    }
+})
 
-        return `<ul>
-                    ${model.users.map((user) => {
-                        return "<li>" + user.name + "</li>"           
-                    }).join("")}
-                </ul>`;
+
+app.add_comp({
+    id: "user-comp",
+    model: {
+        user: [{
+            "id": 1,
+            "name": "Leanne Graham",
+            "username": "Bret",
+        }]
+    },
+    view() {
+        return `
+        <div>
+            <p><b>name</b>: ${this.model.user.name}</p>
+            <p><b>username</b>: ${this.model.user.username}</p>
+        </div>
+        `;
     }
 })
 
 const router = new Router(app)
-router.add_route("#users", "users-comp")
+router.add_route("users-comp", "#users")
+router.add_route("user-comp", "#user-{id}")
