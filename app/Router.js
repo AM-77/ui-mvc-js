@@ -4,7 +4,7 @@ export default class Router {
         this.app = _app
         this.routes = []
         this.current_route = {
-            name: "root",
+            comp_id: "root",
             url: "#"
         }
 
@@ -13,9 +13,9 @@ export default class Router {
         window.addEventListener("DOMContentLoaded", this.hashchanged)
     }
 
-    add_route(_name, _url) {
+    add_route(_comp_id, _url) {
         this.routes.push({
-            name: _name,
+            comp_id: _comp_id,
             url: _url
         })
     }
@@ -28,13 +28,13 @@ export default class Router {
                 break
             } else {
                 this.current_route = {
-                    name: "not-found",
+                    comp_id: "not-found",
                     url: "#404"
                 }
             }
         }
 
-        this.app.show_com(this.current_route)
+        this.app.show_comp(this.current_route)
 
     }
 }
